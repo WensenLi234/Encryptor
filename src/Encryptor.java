@@ -59,7 +59,14 @@ public class Encryptor
         }
         return encrypted;
     }
-
+    public String decryptBlock() {
+        String decrypted = "";
+        for(int i = numCols - 1; i > 0; i--) {
+            for(int j = numRows; j > 0; j--) {
+                if(decrypted)
+            }
+        }
+    }
     /** Encrypts a message.
      *
      *  @param message the string to be encrypted
@@ -69,13 +76,12 @@ public class Encryptor
     public String encryptMessage(String message)
     {
         String encryptedMessage = "";
-        while(!message.equals("")) {
-            message.charAt(a)
-            fillBlock(message);
+        for(int i = 0; i < message.length(); i += numRows * numCols) {
+            fillBlock(message.substring(i));
+            encryptedMessage += encryptBlock();
         }
         return encryptedMessage;
     }
-
     /**  Decrypts an encrypted message. All filler 'A's that may have been
      *   added during encryption will be removed, so this assumes that the
      *   original message (BEFORE it was encrypted) did NOT end in a capital A!
@@ -100,6 +106,17 @@ public class Encryptor
      */
     public String decryptMessage(String encryptedMessage)
     {
-        return "";
+        String decryptedMessage = encryptMessage(encryptedMessage);
+
+        return decryptedMessage;
+    }
+    public String removeFiller(String encryptedMessage) {
+        String newMessage = encryptedMessage;
+        for(int i = newMessage.length() - 1; i > 0; i--) {
+            if(newMessage.charAt(i) == 'A') {
+                newMessage = newMessage.substring(0, i);
+            }
+        }
+        return newMessage;
     }
 }
